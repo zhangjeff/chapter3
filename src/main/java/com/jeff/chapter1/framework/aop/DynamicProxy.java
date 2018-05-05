@@ -57,6 +57,7 @@ public class DynamicProxy implements InvocationHandler {
                 hello.getClass().getInterfaces(),
                 dynamicProxy
         );
+
         helloProxy.say("jack");
     }
 }
