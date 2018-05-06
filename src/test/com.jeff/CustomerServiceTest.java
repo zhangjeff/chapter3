@@ -1,19 +1,11 @@
 package com.jeff;
 
-import com.jeff.chapter1.helper.DataBaseHelper;
-import com.jeff.chapter1.model.Customer;
-import com.jeff.chapter1.service.CustomerService;
-import org.junit.After;
-import org.junit.Before;
+import com.jeff.spring.helper.DataBaseHelper;
+import com.jeff.spring.model.Customer;
+import com.jeff.spring.service.CustomerService;
 import org.junit.Test;
-import org.junit.runner.notification.RunListener;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
-
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 
 /**
  * Created by zhangying on 2018/3/12.

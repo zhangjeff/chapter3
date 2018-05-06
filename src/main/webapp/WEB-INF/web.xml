@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>com.jeff.chapter1.servlet.DispatcherServlet</servlet-class>
+        <servlet-class>com.jeff.spring.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
