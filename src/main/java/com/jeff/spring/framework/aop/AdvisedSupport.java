@@ -12,6 +12,16 @@ public class AdvisedSupport extends ProxyConfig {
 
     private List<Class<?>> interfaces = new ArrayList<Class<?>>();
 
+    private Object advice;
+
+    public void setAdvice(Object advice) {
+        this.advice = advice;
+    }
+
+    public Object getAdvice() {
+        return advice;
+    }
+
     /**
      * Set the interfaces to be proxied.
      */
@@ -34,7 +44,6 @@ public class AdvisedSupport extends ProxyConfig {
 
     public Class<?>[] getProxiedInterfaces(){
         return interfaces.toArray(new Class<?>[interfaces.size()]);
-//        return (Class<?>[]) interfaces.toArray();
     }
 
     public void setTargetSource(TargetSource targetSource) {

@@ -9,9 +9,15 @@ public class DefaultAopProxyFactory implements AopProxyFactory {
 
     @Override
     public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException {
-        if (config.isOptimize()) {
+        if (config.isOptimize() || hasNoUserSuppliedProxyInterfaces(config)) {
           return new JdkDynamicAopProxy(config);
+        } else {
+            return new ObjenesisCglibAopProxy(config);
         }
-        return null;
+    }
+
+    private boolean hasNoUserSuppliedProxyInterfaces(AdvisedSupport config) {
+        Class<?>[] ifcs = config.getProxiedInterfaces();
+        return (ifcs.length == 0 || (ifcs.length == 1 && SpringProxy.class.isAssignableFrom(ifcs[0])));
     }
 }
