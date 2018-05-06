@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class AdvisedSupport extends ProxyConfig {
 
+    TargetSource targetSource = null;
+
     private List<Class<?>> interfaces = new ArrayList<Class<?>>();
 
     /**
@@ -35,4 +37,11 @@ public class AdvisedSupport extends ProxyConfig {
 //        return (Class<?>[]) interfaces.toArray();
     }
 
+    public void setTargetSource(TargetSource targetSource) {
+        this.targetSource = targetSource;
+    }
+
+    public TargetSource getTargetSource(){
+        return targetSource;
+    }
 }
