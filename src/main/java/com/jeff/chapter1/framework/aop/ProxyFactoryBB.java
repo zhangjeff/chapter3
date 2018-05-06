@@ -6,7 +6,7 @@ import java.lang.reflect.Proxy;
 /**
  * @author Youpeng.Zhang on 2018/4/8.
  */
-public class ProxyFactoryBB  {
+public class ProxyFactoryBB  extends AdvisedSupport{
 
     private Object advice;
 
@@ -50,14 +50,20 @@ public class ProxyFactoryBB  {
     public Object getProxy() {
         try {
             Class cls = targetSource.getTarget().getClass();
-            if (cls.isInterface()) {
-                return jdkDynamicAopProxy();
-            } else {
+            if (hasNoUserSuppliedProxyInterfaces(this)) {
                 return objectCglibAopProxy();
+            } else {
+                return jdkDynamicAopProxy();
             }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
+    private boolean hasNoUserSuppliedProxyInterfaces(AdvisedSupport config) {
+        Class<?>[] ifcs = config.getProxiedInterfaces();
+        return (ifcs.length == 0 || (ifcs.length == 1 && SpringProxy.class.isAssignableFrom(ifcs[0])));
+    }
+
 }
