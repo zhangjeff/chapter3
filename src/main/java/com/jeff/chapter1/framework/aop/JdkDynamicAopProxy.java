@@ -5,7 +5,7 @@ import com.jeff.chapter1.framework.Exception.AopConfigException;
 /**
  * Created by zhangying on 2018/5/6.
  */
-public class JdkDynamicAopProxy {
+public class JdkDynamicAopProxy implements AopProxy {
 
     private AdvisedSupport advised;
 

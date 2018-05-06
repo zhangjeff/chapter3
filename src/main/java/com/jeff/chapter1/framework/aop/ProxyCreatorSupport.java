@@ -15,4 +15,8 @@ public class ProxyCreatorSupport extends AdvisedSupport {
         return aopProxyFactory;
     }
 
+    protected AopProxy createAopProxy(){
+        return aopProxyFactory.createAopProxy(this);
+    }
+
 }
