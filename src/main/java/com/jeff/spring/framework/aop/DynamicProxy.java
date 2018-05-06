@@ -1,5 +1,8 @@
 package com.jeff.spring.framework.aop;
 
+import com.jeff.spring.framework.aopnew.Hello;
+import com.jeff.spring.framework.aopnew.HelloImpl;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
