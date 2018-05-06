@@ -26,7 +26,6 @@ public class ProxyFactoryBB  extends AdvisedSupport{
             DynamicProxy dynamicProxy = new DynamicProxy();
             GreetingBeforeAdvice greetingBeforeAdvice = new GreetingBeforeAdvice();
             dynamicProxy.setMethodBeforeAdviceBB(greetingBeforeAdvice);
-
             dynamicProxy.setTargetSource(targetSource);
             return dynamicProxy.getProxy();
         } catch (Exception e) {
