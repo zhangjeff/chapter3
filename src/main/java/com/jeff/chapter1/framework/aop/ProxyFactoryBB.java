@@ -28,12 +28,7 @@ public class ProxyFactoryBB  extends AdvisedSupport{
             dynamicProxy.setMethodBeforeAdviceBB(greetingBeforeAdvice);
 
             dynamicProxy.setTargetSource(targetSource);
-            return Proxy.newProxyInstance(
-                    targetSource.getTarget().getClass().getClassLoader(),
-                    targetSource.getTarget().getClass().getInterfaces(),
-                    dynamicProxy
-
-            );
+            return dynamicProxy.getProxy();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -50,7 +45,7 @@ public class ProxyFactoryBB  extends AdvisedSupport{
     public Object getProxy() {
         try {
             Class cls = targetSource.getTarget().getClass();
-            if (hasNoUserSuppliedProxyInterfaces(this)) {
+            if (!hasNoUserSuppliedProxyInterfaces(this)) {
                 return objectCglibAopProxy();
             } else {
                 return jdkDynamicAopProxy();

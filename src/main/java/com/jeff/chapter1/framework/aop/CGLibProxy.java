@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * @author Youpeng.Zhang on 2018/3/27.
  */
-public class CGLibProxy implements MethodInterceptor {
+public class CGLibProxy implements MethodInterceptor,AopProxy {
 
     private MethodBeforeAdviceBB methodBeforeAdviceBB;
 
@@ -28,20 +28,32 @@ public class CGLibProxy implements MethodInterceptor {
     }
 
 
-    public <T> T getProxy() {
-        try {
-            Class cls = targetSource.getTarget().getClass();
-            return (T) Enhancer.create(cls, this);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public <T> T getProxy() {
+//        try {
+//            Class cls = targetSource.getTarget().getClass();
+//            return (T) Enhancer.create(cls, this);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         methodBeforeAdviceBB.before(method, objects, o);
         Object result = methodProxy.invokeSuper(o, objects);
         return result;
+    }
+
+    @Override
+    public Object getProxy() {
+        try {
+            Class cls = targetSource.getTarget().getClass();
+            return Enhancer.create(cls, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

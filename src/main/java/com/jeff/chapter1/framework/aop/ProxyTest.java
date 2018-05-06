@@ -7,6 +7,11 @@ import java.lang.reflect.Method;
  */
 public class ProxyTest {
 
+    /**
+     * test1
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception{
         ProxyFactoryBB proxyFactoryBB = new  ProxyFactoryBB();
         GreetingBeforeAdvice greetingBeforeAdvice = new GreetingBeforeAdvice();

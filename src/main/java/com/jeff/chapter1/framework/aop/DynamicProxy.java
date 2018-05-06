@@ -7,9 +7,9 @@ import java.lang.reflect.Proxy;
 /**
  * @author Youpeng.Zhang on 2018/3/27.
  */
-public class DynamicProxy implements InvocationHandler {
+public class DynamicProxy implements InvocationHandler, AopProxy {
 
-//    private Object target;
+    //    private Object target;
     private MethodBeforeAdviceBB methodBeforeAdviceBB;
 
     private TargetSource targetSource;
@@ -30,10 +30,10 @@ public class DynamicProxy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 //        before();
 //        methodBeforeAdviceBB.before(method,args,targetSource.getTarget());
-        methodBeforeAdviceBB.before(method,args,proxy);
+        methodBeforeAdviceBB.before(method, args, proxy);
         Object result = method.invoke(targetSource.getTarget(), args);
 //        after();
-        return  result;
+        return result;
     }
 
 //    public void before(){
@@ -52,12 +52,27 @@ public class DynamicProxy implements InvocationHandler {
         dynamicProxy.setMethodBeforeAdviceBB(greetingBeforeAdvice);
 
         dynamicProxy.setTargetSource(new SingletonTargetSource(hello));
-        Hello helloProxy =(Hello) Proxy.newProxyInstance(
+        Hello helloProxy = (Hello) Proxy.newProxyInstance(
                 hello.getClass().getClassLoader(),
                 hello.getClass().getInterfaces(),
                 dynamicProxy
         );
 
         helloProxy.say("jack");
+    }
+
+    @Override
+    public Object getProxy() {
+        try {
+            return Proxy.newProxyInstance(
+                    targetSource.getTarget().getClass().getClassLoader(),
+                    targetSource.getTarget().getClass().getInterfaces(),
+                    this
+
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
